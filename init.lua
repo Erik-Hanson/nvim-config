@@ -122,3 +122,21 @@ require("plugins.bufferline")
       },
     },
   })
+
+  -- Setup HTML language server with specific filetypes
+  require('lspconfig').html.setup({
+    filetypes = { "html", "isml" },
+    settings = {
+      html = {
+        format = {
+          templating = true,
+          wrapLineLength = 120,
+          wrapAttributes = 'auto',
+        },
+        hover = {
+          documentation = true,
+          references = true,
+        },
+      },
+    },
+  })
