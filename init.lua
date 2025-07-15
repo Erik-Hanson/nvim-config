@@ -46,12 +46,17 @@ require("plugins.bufferline")
     },
   })
 
-  -- Define signs for diagnostics
-  local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-  for type, icon in pairs(signs) do
-    local hl = "DiagnosticSign" .. type
-    vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-  end
+  -- Define signs for diagnostics (modern way)
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = " ",
+        [vim.diagnostic.severity.WARN] = " ",
+        [vim.diagnostic.severity.HINT] = " ",
+        [vim.diagnostic.severity.INFO] = " ",
+      }
+    }
+  })
 
   -- Add diagnostic keymaps for easy navigation
   vim.keymap.set('n', '<space>d', vim.diagnostic.open_float, { noremap = true, silent = true })  -- Changed from <space>e to <space>d
